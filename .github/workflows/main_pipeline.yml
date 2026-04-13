@@ -1,0 +1,20 @@
+name: TechMarket Main Pipeline
+on:
+  push:
+    branches: [ main ]
+jobs:
+  Build:
+    uses: ./.github/workflows/templates/template_build.yml
+    with: { node-version: '20' }
+  Test:
+    needs: Build
+    uses: ./.github/workflows/templates/template_test.yml
+    with: { env: 'staging' }
+  Deploy:
+    needs: Test
+    uses: ./.github/workflows/templates/template_deploy.yml
+    with: { bucket-name: 'ignacio-techmarket-2026' }
+    secrets:
+      AWS_ACCESS_KEY: ${{ secrets.AWS_ACCESS_KEY }}
+      AWS_SECRET_KEY: ${{ secrets.AWS_SECRET_KEY }}
+      AWS_SESSION_TOKEN: ${{ secrets.AWS_SESSION_TOKEN }}

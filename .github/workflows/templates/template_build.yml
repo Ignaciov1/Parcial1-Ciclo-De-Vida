@@ -1,0 +1,20 @@
+name: Build Template
+on:
+  workflow_call:
+    inputs:
+      node-version: { required: true, type: string }
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - [cite_start]uses: actions/checkout@v4 # Marketplace [cite: 33]
+      - [cite_start]uses: actions/setup-node@v4 # Marketplace [cite: 33]
+        with:
+          node-version: ${{ inputs.node-version }}
+      - run: |
+          npm install
+          npm run build
+      - uses: actions/upload-artifact@v4
+        with:
+          name: website-dist
+          path: dist/

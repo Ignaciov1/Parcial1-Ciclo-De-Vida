@@ -1,0 +1,31 @@
+name: Deploy Template
+on:
+  workflow_call:
+    inputs:
+      bucket-name: { required: true, type: string }
+    secrets:
+      AWS_ACCESS_KEY: { required: true }
+      AWS_SECRET_KEY: { required: true }
+      AWS_SESSION_TOKEN: { required: true } # Vital para AWS Academy
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    env:
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_KEY }}
+      AWS_SESSION_TOKEN: ${{ secrets.AWS_SESSION_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with: { name: website-dist, path: dist/ }
+      
+      - [cite_start]uses: hashicorp/setup-terraform@v3 # Marketplace [cite: 33]
+      
+      - name: Terraform Deploy
+        run: |
+          cd terraform
+          terraform init
+          terraform apply -var="bucket_name=${{ inputs.bucket-name }}" -auto-approve
+          
+      - name: Sync to S3
+        run: aws s3 sync dist/ s3://${{ inputs.bucket-name }} --delete
