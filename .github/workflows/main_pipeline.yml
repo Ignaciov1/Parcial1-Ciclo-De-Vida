@@ -2,17 +2,14 @@ name: TechMarket Main Pipeline
 on:
   push:
     branches: [ main ]
-
 jobs:
   Build:
     uses: ./.github/workflows/template_build.yml
     with: { node-version: '20' }
-
   Test:
     needs: Build
     uses: ./.github/workflows/template_test.yml
     with: { env: 'staging' }
-
   Deploy:
     needs: Test
     uses: ./.github/workflows/template_deploy.yml

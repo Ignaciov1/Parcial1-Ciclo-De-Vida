@@ -7,8 +7,8 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - [cite_start]uses: actions/checkout@v4 # Marketplace [cite: 33]
-      - [cite_start]uses: actions/setup-node@v4 # Marketplace [cite: 33]
+      - uses: actions/checkout@v4 # Marketplace
+      - uses: actions/setup-node@v4 # Marketplace
         with:
           node-version: ${{ inputs.node-version }}
       - run: |

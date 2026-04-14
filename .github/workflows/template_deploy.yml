@@ -6,7 +6,7 @@ on:
     secrets:
       AWS_ACCESS_KEY: { required: true }
       AWS_SECRET_KEY: { required: true }
-      AWS_SESSION_TOKEN: { required: true } # Vital para AWS Academy
+      AWS_SESSION_TOKEN: { required: true }
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -19,7 +19,7 @@ jobs:
       - uses: actions/download-artifact@v4
         with: { name: website-dist, path: dist/ }
       
-      - [cite_start]uses: hashicorp/setup-terraform@v3 # Marketplace [cite: 33]
+      - uses: hashicorp/setup-terraform@v3 # Marketplace
       
       - name: Terraform Deploy
         run: |
