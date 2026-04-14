@@ -5,5 +5,4 @@ variable "aws_region" {
 variable "bucket_name" {
   description = "Nombre del bucket para TechMarket"
   type        = string
-  default = "ajsdakdakjd1321"
 }
