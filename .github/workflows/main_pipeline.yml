@@ -13,7 +13,7 @@ jobs:
   Deploy:
     needs: Test
     uses: ./.github/workflows/template_deploy.yml
-    with: { bucket-name: 'ignacio-techmarket-2026' }
+    with: { bucket-name: 'ignacio-enzo-techmarket-2026' }
     secrets:
       # Pasamos los secretos usando los nombres exactos que configuraste
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
