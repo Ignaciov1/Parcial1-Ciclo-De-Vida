@@ -15,6 +15,7 @@ jobs:
     uses: ./.github/workflows/template_deploy.yml
     with: { bucket-name: 'ignacio-techmarket-2026' }
     secrets:
-      AWS_ACCESS_KEY: ${{ secrets.AWS_ACCESS_KEY }}
-      AWS_SECRET_KEY: ${{ secrets.AWS_SECRET_KEY }}
+      # Pasamos los secretos usando los nombres exactos que configuraste
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       AWS_SESSION_TOKEN: ${{ secrets.AWS_SESSION_TOKEN }}
